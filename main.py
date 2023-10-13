@@ -68,6 +68,7 @@ while True:
                     continue
                 elif float(lower_limit_input) < float(meteor_object.mass) < float(upper_limit_input):
                     mass_list.append(meteor_object.name + ', ' + meteor_object.mass)
+        print('=' * 40)
         print(' ' * 2, 'Name', ' ' * 21, 'Mass (g)', ' ' * 16)
         print('=' * 40)
         count = 1

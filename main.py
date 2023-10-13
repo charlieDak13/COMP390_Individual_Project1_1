@@ -3,12 +3,16 @@ import meteor_data_class
 # makes empty lists to hold filtered values
 mass_list = []
 year_list = []
+# prints welcome message
 print('Welcome to the Meteorite Sorting Program!\n'
       'This program prints out user specified tables based on the categories and parameters passed into it.')
 print('Written by Charlie Dakai in October 2023\n')
+# makes infinite loop so program always runs and continues until broken
 while True:
+    # lets user enter a file name or quit the program if desired
     file_input = input('Enter a valid file name (ex. "file_name.txt") with its file extension if applicable |or| \n'
                        'Enter "<q" or "<Q" to quit the program: ')
+    # checks if user wants to break, otherwise continues
     if file_input.upper() == '<Q':
         print('Exiting the program. Goodbye!')
         break
@@ -16,6 +20,7 @@ while True:
         print()
         print('Target File: ', file_input)
         print()
+    # gives user mode options to enter or quit the program
     mode_input = input('Please enter a mode to open the file in.\n'
                        "'r':" ' open for reading (default)\n'
                        "'w':" ' open for writing, truncating the file first\n'
@@ -25,6 +30,7 @@ while True:
                        "'t':" ' text mode (default)\n'
                        "'+':" ' open for updating (reading and writing)\n'
                        'Enter <q or <Q to quit the program: ')
+    # checks if user wants to break, otherwise continues
     if mode_input.upper() == '<Q':
         print('Exiting the program. Goodbye!')
         break
@@ -32,21 +38,25 @@ while True:
         print()
         print('File Mode: ', mode_input)
         print()
-        
+    # gives user the option of categories to filter by and the option to quit
     category_input = input('What attribute would u like to filter the data on?\n'
                            '1. meteor MASS (g)\n'
                            '2. The YEAR the meteor fell\n'
                            '3. QUIT\n'
                            '>>')
+    
     if category_input == '1':
+        # sets lower limit and checks if user wants to quit
         lower_limit_input = input('Enter the LOWER limit (inclusive) for the meteors mass(g) ("Q" to quit): ')
         if lower_limit_input == 'Q':
             print('Exiting the program. Goodbye!')
             break
+        # sets upper limit and checks if user wants to quit
         upper_limit_input = input('Enter the UPPER limit (inclusive) for the meteors mass(g) ("Q" to quit): ')
         if upper_limit_input == 'Q':
             print('Exiting the program. Goodbye!')
             break
+        # runs program line for line with the upper and lower limits
         file = open(file_input, mode_input)
         with file as text_file:
             file.readline()
@@ -68,6 +78,7 @@ while True:
                     continue
                 elif float(lower_limit_input) < float(meteor_object.mass) < float(upper_limit_input):
                     mass_list.append(meteor_object.name + ', ' + meteor_object.mass)
+        # prints tables and ends program after
         print('=' * 40)
         print(' ' * 2, 'Name', ' ' * 21, 'Mass (g)', ' ' * 16)
         print('=' * 40)
@@ -78,14 +89,17 @@ while True:
             count = count + 1
         break
     elif category_input == '2':
+        # sets lower limit and checks if user wants to quit
         low_year_input = input('Enter the LOWER limit for the meteors YEAR (inclusive) (Q to quit): ')
         if low_year_input == 'Q':
             print('Exiting the program. Goodbye!')
             break
+        # sets upper limit and checks if user wants to quit
         high_year_input = input('Enter the UPPER limit for the meteors YEAR (inclusive) (Q to quit): ')
         if high_year_input == 'Q':
             print('Exiting the program. Goodbye!')
             break
+        # runs program line for line with the upper and lower limits
         file = open(file_input, mode_input)
         with file as text_file:
             file.readline()
@@ -107,7 +121,7 @@ while True:
                     continue
                 elif int(high_year_input) > int(meteor_object.year) >= int(low_year_input):
                     year_list.append(meteor_object.name + ',' + meteor_object.year)
-        # year table
+        # prints year table and breaks after
         year_count = 1
         print('=' * 40)
         print(' ' * 2, 'Name', ' ' * 20, 'Year', ' ' * 16)
@@ -118,6 +132,7 @@ while True:
             year_count = year_count + 1
         break
     elif category_input == '3':
+        # ends the program
         print('Exiting the program. Goodbye!')
         break
 
